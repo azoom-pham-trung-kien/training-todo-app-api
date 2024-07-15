@@ -1,0 +1,23 @@
+<div>
+  <!-- Uses built-in `if` helper. -->
+  {{#if showTitle}}
+    <h3>Home Page</h3>
+  {{/if}}
+
+  <!-- Calls `foo` helper, overridden at render-level. -->
+  <p>{{foo}}</p>
+
+  <!-- Calls `bar` helper, defined at instance-level. -->
+  <p>{{bar}}</p>
+
+  <form
+    class='form'
+    action='/uploadfile'
+    enctype='multipart/form-data'
+    method='POST'
+  >
+    <input type='file' name='myFile' />
+    <input type='submit' value='Upload a file' />
+  </form>
+
+</div>
