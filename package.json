@@ -1,0 +1,14 @@
+{
+  "name": "tam",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/azoom-pham-trung-kien/express.git",
+  "author": "Pham Van Tam <pham.van.tam@azoom.jp>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "scripts": {
+    "start": "nodemon index.js"
+  }
+}
