@@ -1,36 +1,48 @@
 import http from "http";
+import middlewares from "./middlewares/index.js";
+import morgan from "morgan";
+import routes from "./routes/index.js";
 
+const logger = morgan("tiny");
 const server = http.createServer((req, res) => {
-  // Set CORS headers
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, PUT, DELETE, OPTIONS"
-  );
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  logger(req, res, function (err) {
+    // Set CORS headers
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader(
+      "Access-Control-Allow-Methods",
+      "GET, POST, PUT, DELETE, OPTIONS"
+    );
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
-  // Handle OPTIONS method
-  if (req.method === "OPTIONS") {
-    res.writeHead(204);
-    res.end();
-    return;
-  }
+    // Handle OPTIONS method
+    if (req.method === "OPTIONS") {
+      res.writeHead(204);
+      res.end();
+      return;
+    }
 
-  // Define routes
-  if (req.url === "/" && req.method === "GET") {
-    res.writeHead(200, { "Content-Type": "application/json" });
-    res.end(JSON.stringify({ message: "Welcome to my API!" }));
-    return;
-  }
+    // middlewares
+    const validRequest = middlewares.every((middleware) =>
+      middleware(req, res)
+    );
 
-  if (req.url === "/data" && req.method === "GET") {
-    res.writeHead(200, { "Content-Type": "application/json" });
-    res.end(JSON.stringify({ data: "Some data" }));
-    return;
-  }
+    if (!validRequest) {
+      return;
+    }
 
-  res.writeHead(404, { "Content-Type": "application/json" });
-  res.end(JSON.stringify({ message: "Route not found" }));
+    // Define routes
+    const currentRoute = routes.find(({ path, method }) => {
+      return req.url === path && req.method === method;
+    });
+
+    if (!currentRoute) {
+      res.writeHead(404, { "Content-Type": "application/json" });
+      res.end(JSON.stringify({ message: "Route not found" }));
+    }
+
+    const { handleRequest } = currentRoute;
+    handleRequest(req, res);
+  });
 });
 
 const PORT = process.env.PORT || 3000;

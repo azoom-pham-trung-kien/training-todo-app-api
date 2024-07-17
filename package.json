@@ -17,11 +17,11 @@
   "keywords": [
     "Express"
   ],
-  "scripts": {},
+  "scripts": {
+    "start": "nodemon --inspect src/server.js"
+  },
   "dependencies": {
-    "cors": "^2.8.5",
-    "express": "^4.19.2",
-    "node-fetch": "^2.6.1"
+    "morgan": "^1.10.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.4"
