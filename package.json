@@ -1,35 +1,15 @@
 {
-  "name": "express",
+  "name": "express-demo",
   "version": "1.0.0",
-  "main": "/src/server.js",
+  "main": "index.js",
+  "repository": "https://github.com/azoom-pham-trung-kien/express.git",
+  "author": "Pham Van Tam <pham.van.tam@azoom.jp>",
   "license": "MIT",
-  "description": "Source demo for ExpressJs",
-  "author": "Neik",
-  "type": "module",
-  "bugs": {
-    "url": "https://github.com/azoom-pham-trung-kien/express/issues"
-  },
-  "homepage": "https://github.com/azoom-pham-trung-kien/express#readme",
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/azoom-pham-trung-kien/express.git"
-  },
-  "keywords": [
-    "Express"
-  ],
-  "scripts": {},
   "dependencies": {
-    "cors": "^2.8.5",
-    "express": "^4.19.2"
-  },
-  "devDependencies": {
+    "express": "^4.19.2",
     "nodemon": "^3.1.4"
   },
-  "engines": {
-    "node": "18.20.1"
-  },
-  "volta": {
-    "node": "18.20.1",
-    "yarn": "1.22.17"
+  "scripts": {
+    "dev": "nodemon index.js"
   }
 }
