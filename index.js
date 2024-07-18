@@ -1,7 +1,7 @@
 import express from 'express'
 const app = express()
 const port = 3000
-import { hello, greeting } from './router.mjs'
+import { hello, greeting } from './router.js'
 
 app.get('/hello', (req, res) => {
   res.send(hello(greeting))
