@@ -6,9 +6,10 @@
   "author": "Pham Van Tam <pham.van.tam@azoom.jp>",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "multer": "^1.4.5-lts.1"
   },
   "scripts": {
-    "start": "nodemon index.js"
+    "dev": "nodemon index.js"
   }
 }
