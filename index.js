@@ -1,14 +1,13 @@
 const express = require('express')
 const app = express()
 const port = 3000
+const nnn = require('nnn-router')
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+const options = {
+  routeDir: '/routes'
+}
 
-app.get('/hello', (req, res) => {
-  res.send('Hello World GET!')
-})
+app.use(nnn(options))
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
