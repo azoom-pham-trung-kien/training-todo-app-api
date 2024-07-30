@@ -5,9 +5,9 @@ import { engine } from 'express-handlebars'
 import path from 'path'
 import cookieParser from 'cookie-parser'
 
-import createRoutes from './routes/index.js'
-import createGlobalMiddleWares from './middlewares/global/index.js'
-import createRouteMiddleWare from './middlewares/routes/index.js'
+import createRoutes from '@/routes'
+import createGlobalMiddleWares from '@/middlewares/global'
+import createRouteMiddleWare from '@/middlewares/routes'
 
 const app = express()
 const PORT = process.env.PORT || 3000

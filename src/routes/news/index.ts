@@ -1,4 +1,6 @@
-const createNewsRoutes = router => {
+import type { Router } from 'express'
+
+const createNewsRoutes = (router: Router) => {
   router.get('/news', (request, response) => {
     console.log('get news')
     return response.send('List news')

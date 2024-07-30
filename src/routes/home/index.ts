@@ -1,4 +1,6 @@
-const createHomeRoutes = router => {
+import type { Router } from 'express'
+
+const createHomeRoutes = (router: Router) => {
   router.get('/', (request, response) => {
     return response.render('home', {
       showTitle: true,
