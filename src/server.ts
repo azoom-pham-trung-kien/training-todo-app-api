@@ -5,6 +5,9 @@ import path from 'path'
 import cookieParser from 'cookie-parser'
 import nnnRouter from 'nnn-router'
 import statuses from 'statuses'
+import swaggerUi from 'swagger-ui-express'
+
+import swaggerConfig from '@/swagger.json' assert { type: 'json' }
 
 import createGlobalMiddleWares from '@/middlewares/global'
 import createRouteMiddleWare from '@/middlewares/routes'
@@ -42,6 +45,8 @@ app.use(
     baseRouter: router
   })
 )
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerConfig))
 
 createGlobalMiddleWares(router)
 createRouteMiddleWare(router)

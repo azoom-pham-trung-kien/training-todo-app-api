@@ -4,3 +4,4 @@
 .env
 /src/public/css
 /src/upload/files
+/package-lock.json

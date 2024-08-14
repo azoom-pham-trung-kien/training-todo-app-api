@@ -1,0 +1,303 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Todo CRUD API",
+    "version": "1.0.0",
+    "description": "A simple API to manage todo items. This API allows you to create, view, update, and delete tasks in a todo list."
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "Local server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Todo",
+      "description": "Operations related to todo items"
+    }
+  ],
+  "paths": {
+    "/todos": {
+      "get": {
+        "summary": "Get a specific type of todo list",
+        "tags": ["Todo"],
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "required": true,
+            "description": "The type of todo list to retrieve. 1 for personal, 2 for professional.",
+            "schema": {
+              "type": "integer",
+              "enum": [1, 2]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of todo items based on the specified type.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number",
+                        "description": "The unique identifier for the todo item."
+                      },
+                      "description": {
+                        "type": "string",
+                        "description": "A detailed description of the todo item."
+                      },
+                      "status": {
+                        "type": "number",
+                        "description": "Whether the todo item is completed.",
+                        "enum": [0, 1]
+                      }
+                    },
+                    "required": ["id", "description", "status"]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid todo list type.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": "Invalid todo list type."
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Todo"],
+        "summary": "Add a new todo item",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "required": true,
+            "description": "The type of todo list. 1 for personal, 2 for professional.",
+            "schema": {
+              "type": "integer",
+              "enum": [1, 2]
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "description": {
+                    "type": "string",
+                    "description": "The description of the todo item."
+                  }
+                },
+                "required": ["description"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "A list of todo items based on the specified type.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "number",
+                      "description": "The unique identifier for the todo item."
+                    },
+                    "description": {
+                      "type": "string",
+                      "description": "A detailed description of the todo item."
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "Whether the todo item is completed.",
+                      "enum": [0, 1]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid todo list type.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": "Invalid todo list type."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/todos/{id}": {
+      "put": {
+        "tags": ["Todo"],
+        "summary": "Update a specific todo item",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "The unique id for the todo item.",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "required": true,
+            "description": "The type of todo list. 1 for personal, 2 for professional.",
+            "schema": {
+              "type": "integer",
+              "enum": [1, 2]
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "description": {
+                    "type": "string",
+                    "description": "The description of the todo item."
+                  },
+                  "status": {
+                    "type": "number",
+                    "description": "The status of the todo item.",
+                    "enum": [0, 1]
+                  }
+                },
+                "required": ["description", "status"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The updated todo item.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "number",
+                      "description": "The unique identifier for the todo item."
+                    },
+                    "description": {
+                      "type": "string",
+                      "description": "The description of the todo item."
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "The status of the todo item.",
+                      "enum": [0, 1]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": "Invalid request data"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Todo"],
+        "summary": "Delete a specific todo item",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "The unique id for the todo item.",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "required": true,
+            "description": "The type of todo list. 1 for personal, 2 for professional.",
+            "schema": {
+              "type": "integer",
+              "enum": [1, 2]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The deleted todo item.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "number",
+                      "description": "The unique identifier for the todo item."
+                    },
+                    "description": {
+                      "type": "string",
+                      "description": "The description of the todo item."
+                    },
+                    "status": {
+                      "type": "number",
+                      "description": "The status of the todo item.",
+                      "enum": [0, 1]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request data or todo item not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": "Invalid request data"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
